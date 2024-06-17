@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
 
-class Tools:
+class FileReader:
     # Read CSV
     @staticmethod
-    def readCSV(filePath="Iris.csv"):
+    def readIrisCSV(filePath="Iris.csv"):
         dataFrame = pd.read_csv(filePath)
         irisData = dataFrame.drop(['Id', 'Species'], axis=1).values / 10
 
@@ -20,10 +20,5 @@ class Tools:
             irisTarget = np.where(irisTarget == nameClasses[2], 2, irisTarget)
         return irisData, irisTarget
 
-    # Discriminant function for classification
-    @staticmethod
-    def discriminantFunction(targetMatrix, dataMatrix):
-        dataPseudoInverseMatrix = np.linalg.pinv(dataMatrix)
-        paraMatrix = np.dot(dataPseudoInverseMatrix, targetMatrix)
-        return lambda x: np.dot(paraMatrix.T, x)
+    
     

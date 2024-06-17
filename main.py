@@ -1,15 +1,15 @@
 import numpy as np
-from tools import Tools
+from file_reader import FileReader
 from crossvalidator import CrossValidator
 
 def main():
-    filePath = 'Iris.csv'
-    data, target = Tools.readCSV(filePath)
+    filePath = 'data/Iris.csv'
+    data, target = FileReader.readIrisCSV(filePath)
     classes = np.unique(target)
 
     crossValidator = CrossValidator(data, target, classes)
     
-    averageAccuracy, confusionMatrix = crossValidator.crossValidate(crossValidator.classifyThreeClass)
+    averageAccuracy, confusionMatrix = crossValidator.crossValidate(crossValidator.classifyFisher)
     print(f'Average Accuracy: {averageAccuracy * 100:.2f}%')
     print('Confusion Matrix:')
     print(confusionMatrix)
