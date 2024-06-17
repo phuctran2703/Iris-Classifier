@@ -2,7 +2,7 @@ import numpy as np
 from model.model import Model
 from discriminant_function import ClassificFunction
 
-class FDAModel(Model):
+class FisherModel(Model):
     def __init__(self, dataMatrix, target, classes):
         super().__init__(dataMatrix, target, classes)
 

@@ -1,5 +1,5 @@
 import numpy as np
-from model.FDA_model import FDAModel
+from model.fisher_model import FisherModel
 from model.generative_model import GenerativeModel
 from model.one_versus_one_model import OneVersusOneModel
 from model.one_versus_rest_model import OneVersusRestModel
@@ -26,7 +26,7 @@ class CrossValidator:
 
     def crossValidate(self, classifyFunc):
         if (classifyFunc.__name__ == "classifyFisher"):
-            self.data, self.target = FDAModel(self.data, self.target, self.classes).projectToTwoDimensions()
+            self.data, self.target = FisherModel(self.data, self.target, self.classes).projectToTwoDimensions()
         accuracies = []
         confusionMatrix = np.zeros((len(self.classes), len(self.classes)), dtype=int)
 
@@ -60,7 +60,7 @@ class CrossValidator:
         return predictions
     
     def classifyFisher(self, dataTrain, targetTrain, dataTest):
-        model = FDAModel(dataTrain, targetTrain, self.classes)
+        model = FisherModel(dataTrain, targetTrain, self.classes)
         model.trainModel()
         predictions = np.array([model.predict(x) for x in dataTest])
         return predictions
