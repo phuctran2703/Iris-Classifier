@@ -66,5 +66,5 @@ class CrossValidator:
     def classifyGeneration(self, dataTrain, targetTrain, dataTest):
         model = GenerativeModel(dataTrain, targetTrain, self.classes)
         model.trainModel()
-        predictions = np.array([model.predict(x) for x in dataTest])
+        predictions = model.predict(dataTest)
         return predictions
