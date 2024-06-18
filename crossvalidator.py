@@ -25,8 +25,6 @@ class CrossValidator:
             confusionMatrix[actualLabel, predLabel] += 1
 
     def crossValidate(self, classifyFunc):
-        if (classifyFunc.__name__ == "classifyFisher"):
-            self.data, self.target = FisherModel(self.data, self.target, self.classes).projectToTwoDimensions()
         accuracies = []
         confusionMatrix = np.zeros((len(self.classes), len(self.classes)), dtype=int)
 

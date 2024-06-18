@@ -37,6 +37,8 @@ class GenerativeModel (Model):
         
         self.w0 = np.array(self.w0)
 
+        return self.w, self.w0
+
     def predict(self, input):
         input = np.array(input[1:])
         a = np.dot(self.w.T, input) + self.w0

@@ -37,7 +37,7 @@ class FisherModel(Model):
         self.W = np.hstack([eigList[i][1].reshape(-1, 1) for i in range(2)])
         return self.W
 
-    def projectToTwoDimensions(self):
+    def projectDataToTwoDimensions(self):
         self.dataMatrix = self.dataMatrix[:, 1:]
         self.W = self.findParameterToProject()
         dataInTwoDimensions = np.dot(self.dataMatrix, self.W)
@@ -46,11 +46,21 @@ class FisherModel(Model):
         self.dataMatrix = dataInTwoDimensions
         return self.dataMatrix, self.target
     
+    def projectInputToTwoDimensions(self, input):
+        input = input[1:]
+        self.dataMatrix = self.dataMatrix[:, 1:]
+        input = np.dot(input, self.W)
+        input = np.insert(input, 0, 1)
+        return input
+    
     def trainModel(self):
+        self.projectDataToTwoDimensions()
         self.disFunc = ClassificFunction.discriminantFunction(self.targetMatrix, self.dataMatrix)
 
         return self.disFunc
 
     def predict(self, input):
+        input = self.projectInputToTwoDimensions(input)
+
         prediction = self.disFunc(input)
         return np.argmax(prediction)

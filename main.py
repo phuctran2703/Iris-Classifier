@@ -27,17 +27,17 @@ def main():
     print('Confusion Matrix:')
     print(confusionMatrix,"\n\n")
 
-    averageAccuracy, confusionMatrix = crossValidator.crossValidate(crossValidator.classifyGeneration)
-    print('Classify by Generation Model')
-    print(f'Average Accuracy: {averageAccuracy * 100:.2f}%')
-    print('Confusion Matrix:')
-    print(confusionMatrix,"\n\n")
-
     averageAccuracy, confusionMatrix = crossValidator.crossValidate(crossValidator.classifyFisher)
     print('Classify by Fisher')
     print(f'Average Accuracy: {averageAccuracy * 100:.2f}%')
     print('Confusion Matrix:')
     print(confusionMatrix,"\n\n")
 
+    averageAccuracy, confusionMatrix = crossValidator.crossValidate(crossValidator.classifyGeneration)
+    print('Classify by Generation Model')
+    print(f'Average Accuracy: {averageAccuracy * 100:.2f}%')
+    print('Confusion Matrix:')
+    print(confusionMatrix,"\n\n")
+    
 if __name__ == "__main__":
     main()
