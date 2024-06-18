@@ -39,21 +39,11 @@ class GenerativeModel (Model):
 
         return self.w, self.w0
 
-    # def predict(self, input):
-    #     input = np.array(input[1:])
-    #     a = np.dot(self.w.T, input) + self.w0
-        
-    #     expA = np.exp(a)
-    #     probability = expA / np.sum(expA)
-        
-    #     return np.argmax(probability)
-
-    def predict(self, inputMatrix):
-        inputMatrix = inputMatrix[:, 1:]
-        a = np.dot(inputMatrix, self.w) + self.w0
+    def predict(self, input):
+        input = np.array(input[1:])
+        a = np.dot(self.w.T, input) + self.w0
         
         expA = np.exp(a)
-        probability = expA / np.sum(expA, axis=1, keepdims=True)
+        probability = expA / np.sum(expA)
         
-        return np.argmax(probability, axis=1)
-
+        return np.argmax(probability)
