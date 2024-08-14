@@ -6,7 +6,7 @@ class FisherModel(Model):
     def __init__(self, dataMatrix, target, classes):
         super().__init__(dataMatrix, target, classes)
 
-    def _calculateMeanVectors(self):
+    def _calculateMean(self):
         meanEachClassList = [np.mean(self.dataMatrix[self.target == cls], axis=0) for cls in self.classes]
         meanTotal = np.mean(self.dataMatrix, axis=0)
         return meanEachClassList, meanTotal
@@ -27,7 +27,7 @@ class FisherModel(Model):
         return additionMatrix
 
     def findParameterToProject(self):
-        meanEachClassList, meanTotal = self._calculateMeanVectors()
+        meanEachClassList, meanTotal = self._calculateMean()
         Sw = self._calculateWithinClassCovarianceMatrix(meanEachClassList)
         Sb = self._calculateBetweenClassCovarianceMatrix(meanEachClassList, meanTotal)
         
