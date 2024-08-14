@@ -1,1 +1,1 @@
-How to run code: python main.py
+How to run code: Enter file main.py, run python main.py
